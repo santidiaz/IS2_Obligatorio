@@ -1,0 +1,6 @@
+projectKey=mytree_key
+serverUrl=http://localhost:9000
+serverVersion=6.7.6.38781
+dashboardUrl=http://localhost:9000/dashboard/index/mytree_key
+ceTaskId=AWnbMqKRoBHz5gBA6OVv
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWnbMqKRoBHz5gBA6OVv
