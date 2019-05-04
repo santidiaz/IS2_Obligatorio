@@ -94,10 +94,10 @@ public final class UserEditDialogController
         user.setBirthday(Date.from(Instant.from(birthdayField.getValue().atStartOfDay(ZoneId.systemDefault()))));
 
         // Make validations
-        if (validateUser(user)) {
+        //if (validateUser(user)) {
             BusinessLogicLocator.getInstance().getUserBusinessLogic().save(user);
             dialogStage.close();
-        }
+        //}
     }
 
     @FXML
