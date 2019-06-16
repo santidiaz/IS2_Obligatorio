@@ -39,7 +39,9 @@ public final class UserEditDialogController
     @FXML
     private TextField secondSurnameField;
     @FXML
-    private TextField countryField;
+    private TextField firstCountryField;
+    @FXML
+    private TextField secondCountryField;
     @FXML
     private DatePicker birthdayField;
     @FXML
@@ -64,7 +66,8 @@ public final class UserEditDialogController
         firstSurnameField.setText(userModel.getFirstSurname().getValue());
         secondSurnameField.setText(userModel.getSecondSurname().getValue());
         picturePathLabel.setText(userModel.getPicturePath().getValue());
-        countryField.setText(userModel.getCountry().getValue());
+        firstCountryField.setText(userModel.getFirstCountry().getValue());
+        secondCountryField.setText(userModel.getSecondCountry().getValue());
         birthdayField.setValue(LocalDate.from(
                 Instant.ofEpochMilli(userModel.getBirthday().getValue().getTime()).atZone(ZoneId.systemDefault())));
     }
@@ -90,7 +93,8 @@ public final class UserEditDialogController
         user.setFirstSurname(firstSurnameField.getText());
         user.setSecondSurname(secondSurnameField.getText());
         user.setPicturePath(picturePathLabel.getText());
-        user.setCountry(countryField.getText());
+        user.setFirstCountry(firstCountryField.getText());
+        user.setSecondCountry(secondCountryField.getText());
         user.setBirthday(Date.from(Instant.from(birthdayField.getValue().atStartOfDay(ZoneId.systemDefault()))));
 
         // Make validations

@@ -27,7 +27,8 @@ public final class UserModel {
     private StringProperty firstSurname;
     private StringProperty secondSurname;
     private StringProperty picturePath;
-    private StringProperty country;
+    private StringProperty firstCountry;
+    private StringProperty secondCountry;
     private ObjectProperty<Date> birthday;
 
     public UserModel(final User user) {
@@ -38,7 +39,8 @@ public final class UserModel {
         this.firstSurname = new SimpleStringProperty(user.getFirstSurname());
         this.secondSurname = new SimpleStringProperty(user.getSecondSurname());
         this.picturePath = new SimpleStringProperty(user.getPicturePath());
-        this.country = new SimpleStringProperty(user.getCountry());
+        this.firstCountry = new SimpleStringProperty(user.getFirstCountry());
+        this.secondCountry = new SimpleStringProperty(user.getSecondCountry());
         this.birthday = new SimpleObjectProperty<>(user.getBirthday());
 
     }
@@ -99,12 +101,18 @@ public final class UserModel {
         this.picturePath = picturePath;
     }
 
-    public StringProperty getCountry() {
-        return country;
+    public StringProperty getFirstCountry() {
+        return firstCountry;
     }
-
-    public void setCountry(final StringProperty country) {
-        this.country = country;
+    public void setFirstCountry(final StringProperty country) {
+        this.firstCountry = country;
+    }
+    
+    public StringProperty getSecondCountry() {
+        return secondCountry;
+    }
+    public void setSecondCountry(final StringProperty country) {
+        this.secondCountry = country;
     }
 
     public ObjectProperty<Date> getBirthday() {

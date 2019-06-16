@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.mytree.ui.controller;
 
 import com.mytree.business.logic.BusinessLogicLocator;
@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public final class UserDetailsDialogController extends BaseController {
-
+    
     @FXML
     private Label usernameLabel;
     @FXML
@@ -34,32 +34,36 @@ public final class UserDetailsDialogController extends BaseController {
     @FXML
     private Label birthdayLabel;
     @FXML
+    private Label firstCountryLabel;
+    @FXML
+    private Label secondCountryLabel;
+    @FXML
     private ImageView pictureImage;
-
+    
     private Stage dialogStage;
     private int userId;
-
+    
     public UserDetailsDialogController() {
     }
-
+    
     public void setDialogStage(final Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
+    
     public void setUserId(final int userId) {
         this.userId = userId;
         loadDetails();
     }
-
+    
     @Override
     protected void onInitialize() {
     }
-
+    
     @FXML
     private void handleClose() {
         dialogStage.close();
     }
-
+    
     private void loadDetails() {
         User user = BusinessLogicLocator.getInstance().getUserBusinessLogic().getUser(userId);
         String imagePath = Constants.USER_PROFILE;
@@ -73,9 +77,10 @@ public final class UserDetailsDialogController extends BaseController {
         secondNameLabel.setText(user.getSecondName());
         firstSurnameLabel.setText(user.getFirstSurname());
         secondSurnameLabel.setText(user.getSecondSurname());
-        countryLabel.setText(user.getCountry());
+        firstCountryLabel.setText(user.getFirstCountry());
+        secondCountryLabel.setText(user.getSecondCountry());
         birthdayLabel.setText(
                 DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault()).format(user.getBirthday()));
-
+        
     }
 }

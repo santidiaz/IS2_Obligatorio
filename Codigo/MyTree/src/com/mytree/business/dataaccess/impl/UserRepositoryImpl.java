@@ -33,7 +33,8 @@ public final class UserRepositoryImpl
             user.setFirstSurname(entity.getFirstSurname());
             user.setSecondSurname(entity.getSecondSurname());
             user.setPicturePath(entity.getPicturePath());
-            user.setCountry(entity.getCountry());
+            user.setFirstCountry(entity.getFirstCountry());
+            user.setSecondCountry(entity.getSecondCountry());
             user.setBirthday(entity.getBirthday());
         }
     }

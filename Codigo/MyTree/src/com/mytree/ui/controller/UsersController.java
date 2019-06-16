@@ -40,7 +40,9 @@ public final class UsersController extends BaseController {
     @FXML
     private Label secondSurnameLabel;
     @FXML
-    private Label countryLabel;
+    private Label firstCountryLabel;
+    @FXML
+    private Label secondCountryLabel;
     @FXML
     private Label birthdayLabel;
     @FXML
@@ -54,8 +56,9 @@ public final class UsersController extends BaseController {
         nameColumn.setCellValueFactory(cellData -> {
             return new SimpleStringProperty(cellData.getValue().toString());
         });
-        userTable.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
+        userTable.getSelectionModel()
+                 .selectedItemProperty()
+                 .addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
         showUserDetails(null);
         reload();
     }
@@ -98,7 +101,8 @@ public final class UsersController extends BaseController {
             secondNameLabel.setText(user.getSecondName());
             firstSurnameLabel.setText(user.getFirstSurname());
             secondSurnameLabel.setText(user.getSecondSurname());
-            countryLabel.setText(user.getCountry());
+            firstCountryLabel.setText(user.getFirstCountry());
+            secondCountryLabel.setText(user.getSecondCountry());
             birthdayLabel.setText(DateFormat.getDateInstance(DateFormat.LONG, 
                     Locale.getDefault()).format(user.getBirthday()));
         } else {
@@ -107,7 +111,8 @@ public final class UsersController extends BaseController {
             secondNameLabel.setText("");
             firstSurnameLabel.setText("");
             secondSurnameLabel.setText("");
-            countryLabel.setText("");
+            firstCountryLabel.setText("");
+            secondCountryLabel.setText("");
             birthdayLabel.setText("");
         }
         pictureImage.setImage(new Image(imagePath));

@@ -66,11 +66,19 @@ public final class UserTest {
     }
 
     @Test
-    public void testCountryPropertyCase() {
-        String expected = "expected";
+    public void testFirstCountryPropertyCase() {
+        String expected = "Uruguay";
         User instance = new User();
-        instance.setCountry(expected);
-        assertEquals(expected, instance.getCountry());
+        instance.setFirstCountry(expected);
+        assertEquals(expected, instance.getFirstCountry());
+    }
+    
+    @Test
+    public void testSecondCountryPropertyCase() {
+        String expected = "Brasil";
+        User instance = new User();
+        instance.setSecondCountry(expected);
+        assertEquals(expected, instance.getSecondCountry());
     }
 
     @Test
