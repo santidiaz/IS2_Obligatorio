@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
@@ -11,12 +15,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mytree.ui.controller.UserEditDialogController">
+<AnchorPane id="AnchorPane" prefHeight="602.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mytree.ui.controller.UserEditDialogController">
     <children>
-        <GridPane layoutX="1.0" layoutY="2.0" prefWidth="341.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <GridPane layoutX="14.0" layoutY="73.0" prefHeight="356.0" prefWidth="360.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="73.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" minWidth="120.0" prefWidth="120.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="266.20001220703125" />
+                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="226.0" minWidth="120.0" prefWidth="194.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="197.0" minWidth="10.0" prefWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="253.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -27,6 +32,9 @@
                 <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints />
             </rowConstraints>
             <children>
                 <Label text="Username" />
@@ -34,24 +42,28 @@
                 <Label text="Segundo Nombre" GridPane.rowIndex="2" />
                 <Label text="Primer Apellido" GridPane.rowIndex="3" />
                 <Label text="Segundo Apellido" GridPane.rowIndex="4" />
-                <Label text="Nacimiento" GridPane.rowIndex="5" />
-                <TextField fx:id="usernameField" GridPane.columnIndex="1" />
-                <TextField fx:id="firstNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="secondNameField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="firstSurnameField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField fx:id="secondSurnameField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <DatePicker fx:id="birthdayField" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Label text="1ra Nacionalidad" GridPane.rowIndex="6" />
-                <TextField fx:id="firstCountryField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                <Label text="2da Nacionalidad" GridPane.rowIndex="7" />
-                <TextField fx:id="secondCountryField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="8">
+                <Label text="Fecha de nacimiento" GridPane.rowIndex="5" />
+                <TextField fx:id="usernameField" prefHeight="31.0" prefWidth="243.0" GridPane.columnIndex="2" />
+                <TextField fx:id="firstNameField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <TextField fx:id="secondNameField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <TextField fx:id="firstSurnameField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <TextField fx:id="secondSurnameField" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                <DatePicker fx:id="birthdayField" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                <Label text="1ra Nacionalidad" GridPane.rowIndex="8" />
+                <TextField fx:id="firstCountryField" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                <Label text="2da Nacionalidad" GridPane.rowIndex="9" />
+                <TextField fx:id="secondCountryField" prefHeight="31.0" prefWidth="210.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                <AnchorPane GridPane.columnIndex="2" GridPane.rowIndex="10">
                     <children>
                         <Hyperlink layoutX="28.0" layoutY="9.0" onAction="#handleSelectPicture" text="Seleccionar foto" AnchorPane.rightAnchor="0.0" />
                         <Label fx:id="picturePathLabel" layoutY="12.0" textOverrun="LEADING_ELLIPSIS" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="104.0" />
                     </children>
                 </AnchorPane>
-                <Label text="Foto de perfil" GridPane.rowIndex="8" />
+                <Label text="Foto de perfil" GridPane.rowIndex="10" />
+                <DatePicker fx:id="deathdayField" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                <Label text="Fecha de fallecimiento:" GridPane.rowIndex="6" />
+                <Label text="Edad" GridPane.rowIndex="7" />
+                <Label fx:id="ageLabel" disable="true" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             </children>
         </GridPane>
         <HBox layoutX="470.0" layoutY="361.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
@@ -60,5 +72,10 @@
                 <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar" />
             </children>
         </HBox>
+        <Label fx:id="userTitleLabel" layoutX="27.0" layoutY="14.0" prefHeight="48.0" prefWidth="160.0" text="Nuevo Usuario" underline="true">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

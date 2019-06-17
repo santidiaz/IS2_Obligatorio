@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.mytree.ui.controller;
 
 import com.mytree.business.logic.BusinessLogicLocator;
@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 
 public final class UserEditDialogController
         extends BaseController {
-
+    
     @FXML
     private Label picturePathLabel;
     @FXML
@@ -45,19 +45,23 @@ public final class UserEditDialogController
     @FXML
     private DatePicker birthdayField;
     @FXML
+    private DatePicker deathdayField;
+    @FXML
+    private Label ageLabel;
+    @FXML
     private Button cancelButton;
-
+    
     private Stage dialogStage;
     private FileChooser fileChooser;
     private UserModel userModel;
-
+    
     public UserEditDialogController() {
     }
-
+    
     public void setDialogStage(final Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
+    
     public void setUser(final UserModel userModel) {
         this.userModel = userModel;
         usernameField.setText(userModel.getUsername().getValue());
@@ -68,14 +72,20 @@ public final class UserEditDialogController
         picturePathLabel.setText(userModel.getPicturePath().getValue());
         firstCountryField.setText(userModel.getFirstCountry().getValue());
         secondCountryField.setText(userModel.getSecondCountry().getValue());
+        ageLabel.setText(userModel.getAge().getValue());
         birthdayField.setValue(LocalDate.from(
                 Instant.ofEpochMilli(userModel.getBirthday().getValue().getTime()).atZone(ZoneId.systemDefault())));
+        
+        if (userModel.getDeathday().getValue() != null) {
+            deathdayField.setValue(LocalDate.from(
+                    Instant.ofEpochMilli(userModel.getDeathday().getValue().getTime()).atZone(ZoneId.systemDefault())));
+        }
     }
-
+    
     public void allowCancel(final boolean allow) {
         cancelButton.setDisable(!allow);
     }
-
+    
     @Override
     protected void onInitialize() {
         fileChooser = new FileChooser();
@@ -83,11 +93,12 @@ public final class UserEditDialogController
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
     }
-
+    
     @FXML
     private void handleSave() {
         User user = new User();
         user.setId(userModel.getId().getValue());
+        user.setUsername(usernameField.getText());
         user.setFirstName(firstNameField.getText());
         user.setSecondName(secondNameField.getText());
         user.setFirstSurname(firstSurnameField.getText());
@@ -95,34 +106,71 @@ public final class UserEditDialogController
         user.setPicturePath(picturePathLabel.getText());
         user.setFirstCountry(firstCountryField.getText());
         user.setSecondCountry(secondCountryField.getText());
-        user.setBirthday(Date.from(Instant.from(birthdayField.getValue().atStartOfDay(ZoneId.systemDefault()))));
-
+        
         // Make validations
-        //if (validateUser(user)) {
+        if (validateUser(user)) {
             BusinessLogicLocator.getInstance().getUserBusinessLogic().save(user);
             dialogStage.close();
-        //}
+        }
     }
-
+    
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
-
+    
     @FXML
     private void handleSelectPicture() {
         File file = fileChooser.showOpenDialog(dialogStage);
         picturePathLabel.setText(file.getAbsolutePath());
     }
-
+    
     private boolean validateUser(final User user) {
-
         // Validate fields
         StringBuilder resultBuilder = new StringBuilder();
+        
         if (user.getUsername().trim().isEmpty()) {
-            resultBuilder.append(Constants.USERNAME_REQUIRED);
+            resultBuilder.append(Constants.USERNAME_REQUIRED + "\n");
         }
-
+        
+        if (user.getFirstName().trim().isEmpty()) {
+            resultBuilder.append(Constants.FIRSTNAME_REQUIRED + "\n");
+        }
+        
+        if (user.getFirstSurname().trim().isEmpty()) {
+            resultBuilder.append(Constants.FIRST_SURNAME_REQUIRED + "\n");
+        }
+        
+        if (user.getSecondSurname().trim().isEmpty()) {
+            resultBuilder.append(Constants.SECOND_SURNAME_REQUIRED + "\n");
+        }
+        
+        boolean birthday_valid = false;
+        if(birthdayField.getValue() != null) {
+            Date date = Date.from(Instant.from(birthdayField.getValue().atStartOfDay(ZoneId.systemDefault())));
+            if(date.after(new Date())) {
+                resultBuilder.append(Constants.BIRTHDAY_CANT_BE_FUTURE + "\n");
+            } else {
+                birthday_valid = true;
+                user.setBirthday(date);
+            }
+        } else {
+            resultBuilder.append(Constants.BIRTHDAY_REQUIRED + "\n");
+        }
+        
+        if(deathdayField.getValue() != null && birthday_valid) {
+            Date date = Date.from(Instant.from(deathdayField.getValue().atStartOfDay(ZoneId.systemDefault())));
+            if(date.before(user.getBirthday())) {
+                resultBuilder.append(Constants.DETHDATE_BEFORE_BIRTHDAY + "\n");
+            } else {
+                user.setDeathday(date);
+            }
+        }
+        
+        if (user.getFirstCountry().trim().isEmpty()) {
+            resultBuilder.append(Constants.FIRST_COUNTRY_REQUIRED + "\n");
+        }
+        
         // Present error
         String result = resultBuilder.toString();
         boolean isValidUser = result.isEmpty();
@@ -131,5 +179,5 @@ public final class UserEditDialogController
         }
         return isValidUser;
     }
-
+    
 }

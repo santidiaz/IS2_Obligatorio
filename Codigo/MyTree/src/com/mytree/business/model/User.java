@@ -25,6 +25,7 @@ public final class User {
     private String firstCountry;
     private String secondCountry;
     private Date birthday;
+    private Date deathday;
     private Collection<UserRelationship> parents;
     private Collection<UserRelationship> children;
     private Collection<UserRelationship> spouses;
@@ -112,6 +113,33 @@ public final class User {
     }
     public void setBirthday(final Date birthday) {
         this.birthday = (Date) birthday.clone();
+    }
+
+    public Date getDeathday() {
+        if (this.deathday != null) {
+            return (Date) deathday.clone();
+        } else {
+            return null;
+        }        
+    }
+    public void setDeathday(final Date deathday) {
+        this.deathday = (Date) deathday.clone();
+    }
+
+    public int getAge() {
+        int age = 0;
+        if(this.birthday != null) {
+            if(this.deathday == null) {
+                 age = calculateAge(new Date());
+            } else {
+                age = calculateAge(this.deathday);
+            }
+        }
+        return age;
+    }
+    
+    private int calculateAge(Date currentDate) {
+        return Math.abs(currentDate.getYear() - birthday.getYear());
     }
     
     public Collection<UserRelationship> getParents() {

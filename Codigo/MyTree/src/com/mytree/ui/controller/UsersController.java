@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.mytree.ui.controller;
 
 import com.mytree.business.logic.BusinessLogicLocator;
@@ -24,7 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public final class UsersController extends BaseController {
-
+    
     @FXML
     private TableView<User> userTable;
     @FXML
@@ -46,30 +46,34 @@ public final class UsersController extends BaseController {
     @FXML
     private Label birthdayLabel;
     @FXML
+    private Label deathdayLabel;
+    @FXML
+    private Label ageLabel;
+    @FXML
     private ImageView pictureImage;
-
+    
     public UsersController() {
     }
-
+    
     @Override
     protected void onInitialize() {
         nameColumn.setCellValueFactory(cellData -> {
             return new SimpleStringProperty(cellData.getValue().toString());
         });
         userTable.getSelectionModel()
-                 .selectedItemProperty()
-                 .addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
         showUserDetails(null);
         reload();
     }
-
+    
     @FXML
     private void handleNewUser() {
         UserModel userModel = new UserModel(new User());
         getNavigationManager().showUserEditDialog(userModel, true);
         reload();
     }
-
+    
     @FXML
     private void handleEditUser() {
         User user = checkUserSelection();
@@ -78,7 +82,7 @@ public final class UsersController extends BaseController {
             reload();
         }
     }
-
+    
     private void reload() {
         ObservableList<User> users = FXCollections.observableArrayList();
         BusinessLogicLocator.getInstance().getUserBusinessLogic().getUsers(true).forEach((user) -> {
@@ -87,7 +91,7 @@ public final class UsersController extends BaseController {
         userTable.setItems(users);
         userTable.refresh();
     }
-
+    
     private void showUserDetails(final User user) {
         String imagePath = Constants.USER_PROFILE;
         if (user != null) {
@@ -103,8 +107,16 @@ public final class UsersController extends BaseController {
             secondSurnameLabel.setText(user.getSecondSurname());
             firstCountryLabel.setText(user.getFirstCountry());
             secondCountryLabel.setText(user.getSecondCountry());
-            birthdayLabel.setText(DateFormat.getDateInstance(DateFormat.LONG, 
+            ageLabel.setText(String.valueOf(user.getAge()));
+            birthdayLabel.setText(DateFormat.getDateInstance(DateFormat.LONG,
                     Locale.getDefault()).format(user.getBirthday()));
+            
+            if(user.getDeathday() != null) {
+                deathdayLabel.setText(DateFormat.getDateInstance(DateFormat.LONG,
+                        Locale.getDefault()).format(user.getDeathday()));
+            } else {
+                deathdayLabel.setText("");
+            }
         } else {
             usernameLabel.setText("");
             firstNameLabel.setText("");
@@ -114,10 +126,12 @@ public final class UsersController extends BaseController {
             firstCountryLabel.setText("");
             secondCountryLabel.setText("");
             birthdayLabel.setText("");
+            deathdayLabel.setText("");
+            ageLabel.setText("");
         }
         pictureImage.setImage(new Image(imagePath));
     }
-
+    
     private User checkUserSelection() {
         User user = userTable.getSelectionModel().getSelectedItem();
         if (user == null) {
@@ -126,5 +140,5 @@ public final class UsersController extends BaseController {
         }
         return user;
     }
-
+    
 }

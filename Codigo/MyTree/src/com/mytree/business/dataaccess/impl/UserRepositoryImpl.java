@@ -36,6 +36,9 @@ public final class UserRepositoryImpl
             user.setFirstCountry(entity.getFirstCountry());
             user.setSecondCountry(entity.getSecondCountry());
             user.setBirthday(entity.getBirthday());
+            if(entity.getDeathday() != null) {
+                user.setDeathday(entity.getDeathday());
+            }
         }
     }
 

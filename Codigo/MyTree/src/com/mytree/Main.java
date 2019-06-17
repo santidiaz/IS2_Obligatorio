@@ -47,7 +47,7 @@ public final class Main
         this.primaryStage = primaryStage;
         primaryStage.setTitle(Constants.APP_TITLE);
 
-        showUserEditDialog(new UserModel(new User()), false);
+        // showUserEditDialog(new UserModel(new User()), false);
         initRootLayout();
         showTree();
     }
@@ -63,8 +63,8 @@ public final class Main
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
-            primaryStage.setResizable(false);
+            primaryStage.setMaximized(false);
+            primaryStage.setResizable(true);
             primaryStage.show();
 
         } catch (IOException e) {

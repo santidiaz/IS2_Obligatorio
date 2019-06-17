@@ -24,7 +24,14 @@ public final class Constants {
     public static final String SELECT_USER = "Por favor seleccione un usuario.";
     public static final String WITHOUT_SELECTION = "Sin selección";
     public static final String WITHOUT_USER_SELECTED = "No ha seleccionado usuario";
-    public static final String USERNAME_REQUIRED = "El usuario no puede estar vacio";
+    public static final String USERNAME_REQUIRED = "Nombre de usuario requerido";
+    public static final String FIRSTNAME_REQUIRED = "Primer nombre requerido";
+    public static final String FIRST_SURNAME_REQUIRED = "Primer apellido requerido";
+    public static final String SECOND_SURNAME_REQUIRED = "Segundo apellido requerido";
+    public static final String BIRTHDAY_REQUIRED = "Fecha de nacimiento requerida";
+    public static final String BIRTHDAY_CANT_BE_FUTURE = "Fecha de nacimiento no puede ser en el futuro";
+    public static final String DETHDATE_BEFORE_BIRTHDAY = "Fecha de muerte no puede anterior a la fecha de nacimiento";
+    public static final String FIRST_COUNTRY_REQUIRED = "1ra nacionalidad requerida";
     public static final String USER_ERROR = "";
     public static final String ADD_USER_ERROR = "";
     public static final String USER_DETAILS = "Ficha de usuario";

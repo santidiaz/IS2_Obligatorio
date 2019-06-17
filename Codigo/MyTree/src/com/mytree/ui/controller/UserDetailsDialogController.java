@@ -34,6 +34,10 @@ public final class UserDetailsDialogController extends BaseController {
     @FXML
     private Label birthdayLabel;
     @FXML
+    private Label deathdayLabel;
+    @FXML
+    private Label ageLabel;
+    @FXML
     private Label firstCountryLabel;
     @FXML
     private Label secondCountryLabel;
@@ -79,8 +83,11 @@ public final class UserDetailsDialogController extends BaseController {
         secondSurnameLabel.setText(user.getSecondSurname());
         firstCountryLabel.setText(user.getFirstCountry());
         secondCountryLabel.setText(user.getSecondCountry());
+        ageLabel.setText(String.valueOf(user.getAge()));
         birthdayLabel.setText(
                 DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault()).format(user.getBirthday()));
+        deathdayLabel.setText(
+                DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault()).format(user.getDeathday()));
         
     }
 }
