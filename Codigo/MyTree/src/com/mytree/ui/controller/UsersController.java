@@ -73,6 +73,11 @@ public final class UsersController extends BaseController {
         getNavigationManager().showUserEditDialog(userModel, true);
         reload();
     }
+    @FXML
+    private void handleAttachmentsUser() {
+        getNavigationManager().showAttachments();
+        reload();
+    }
     
     @FXML
     private void handleEditUser() {
