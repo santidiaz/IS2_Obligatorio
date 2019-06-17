@@ -31,5 +31,7 @@ public interface NavigationManager {
     void showUserDetails(int userId);
     
     void showUserAttachmentsDialog(int userId);
+    
+    void showMainPage();
 
 }

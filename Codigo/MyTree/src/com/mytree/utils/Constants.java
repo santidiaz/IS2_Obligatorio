@@ -14,6 +14,7 @@ public final class Constants {
 
     // Resources
     public static final String USER_PROFILE = "file:resources/images/user-profile.png";
+    public static final String MAIN_PAGE_IMG = "file:resources/images/mainPage.png";
 
     // Commons
     public static final String APP_TITLE = "MyTree";

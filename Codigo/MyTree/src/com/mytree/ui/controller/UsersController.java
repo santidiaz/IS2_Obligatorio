@@ -88,6 +88,15 @@ public final class UsersController extends BaseController {
         }
     }
     
+    @FXML
+    private void handleLogin() {
+        User user = checkUserSelection();
+        if (user != null) {
+            getNavigationManager().showUserEditDialog(new UserModel(user), true);
+            reload();
+        }
+    }
+    
     private void reload() {
         ObservableList<User> users = FXCollections.observableArrayList();
         BusinessLogicLocator.getInstance().getUserBusinessLogic().getUsers(true).forEach((user) -> {
