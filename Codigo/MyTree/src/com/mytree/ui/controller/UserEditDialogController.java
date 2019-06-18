@@ -122,7 +122,9 @@ public final class UserEditDialogController
     @FXML
     private void handleSelectPicture() {
         File file = fileChooser.showOpenDialog(dialogStage);
-        picturePathLabel.setText(file.getAbsolutePath());
+        if(file != null) {
+            picturePathLabel.setText(file.getAbsolutePath());
+        }
     }
     
     private boolean validateUser(final User user) {

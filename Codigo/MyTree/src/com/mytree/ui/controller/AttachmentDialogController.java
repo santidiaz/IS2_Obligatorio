@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.mytree.ui.controller;
 
 import com.mytree.business.logic.BusinessLogicLocator;
@@ -37,10 +37,10 @@ import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 
 public final class AttachmentDialogController extends BaseController {
-
+    
     private static final int HASH = 7;
     private static final int HASH_RANDOM = 79;
-
+    
     @FXML
     private TextField nameField;
     @FXML
@@ -55,22 +55,22 @@ public final class AttachmentDialogController extends BaseController {
     private DatePicker fromDatePicker;
     @FXML
     private DatePicker toDatePicker;
-
+    
     private Stage dialogStage;
     private FileChooser fileChooser;
     private Map<String, ObservableList<OwnerItem>> ownersByRelationship;
-
+    
     public void setDialogStage(final Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
-
+    
     @Override
     protected void onInitialize() {
         LocalDate now = LocalDate.now(ZoneId.systemDefault());
         fromDatePicker.setValue(now);
         toDatePicker.setValue(now);
         fileChooser = new FileChooser();
-
+        
         // Get owner data
         BusinessLogicLocator locator = BusinessLogicLocator.getInstance();
         Collection<User> users = locator.getUserBusinessLogic().getUsers(true);
@@ -79,7 +79,7 @@ public final class AttachmentDialogController extends BaseController {
         ObservableList<OwnerItem> userList = getAttachmentUserOwners(users);
         ObservableList<OwnerItem> marriedList = getAttachmentUserRelationshipOwners(usersMap, Relationship.MARRIED);
         ObservableList<OwnerItem> unionList = getAttachmentUserRelationshipOwners(usersMap, Relationship.UNION);
-
+        
         ownersByRelationship = new HashMap<>();
         ownersByRelationship.put(Constants.PEOPLE, userList);
         if (marriedList.size() > 0) {
@@ -90,7 +90,7 @@ public final class AttachmentDialogController extends BaseController {
         }
         reload();
     }
-
+    
     @FXML
     private void handleOwnerTypeComboBoxSelection() {
         String ownerType = (String) ownerTypeComboBox.getValue();
@@ -98,13 +98,15 @@ public final class AttachmentDialogController extends BaseController {
         ownerComboBox.getItems().addAll(ownersByRelationship.get(ownerType));
         ownerComboBox.getCheckModel().check(0);
     }
-
+    
     @FXML
     private void handleSelectAttachment() {
         File file = fileChooser.showOpenDialog(dialogStage);
-        attachmentPathLabel.setText(file.getAbsolutePath());
+        if(file != null) {
+            attachmentPathLabel.setText(file.getAbsolutePath());
+        }
     }
-
+    
     @FXML
     private void handleSave() {
         ObservableList<OwnerItem> checkedOwnerItems = ownerComboBox.getCheckModel().getCheckedItems();
@@ -115,7 +117,7 @@ public final class AttachmentDialogController extends BaseController {
             isFamilyOwner = Constants.FAMILY.equals(ownerItem.getTitle());
             owners.addAll(ownerItem.getOwners());
         }
-
+        
         // Create attachment
         Attachment attachment = new Attachment();
         attachment.setName(nameField.getText());
@@ -125,19 +127,19 @@ public final class AttachmentDialogController extends BaseController {
         attachment.setFamilyOwner(isFamilyOwner);
         attachment.setFromDate(Date.from(Instant.from(fromDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()))));
         attachment.setToDate(Date.from(Instant.from(toDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()))));
-
+        
         // Save it
         if (validateAttachment(attachment)) {
             BusinessLogicLocator.getInstance().getAttachmentBusinessLogic().save(attachment);
             dialogStage.close();
         }
     }
-
+    
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
-
+    
     @FXML
     private void handleDatePicker() {
         LocalDate from = fromDatePicker.getValue();
@@ -146,13 +148,13 @@ public final class AttachmentDialogController extends BaseController {
             toDatePicker.setValue(from);
         }
     }
-
+    
     private void reload() {
         ownerTypeComboBox.getItems().addAll(ownersByRelationship.keySet());
         ownerTypeComboBox.getSelectionModel().selectFirst();
         handleOwnerTypeComboBoxSelection();
     }
-
+    
     private ObservableList<OwnerItem> getAttachmentUserOwners(final Collection<User> users) {
         ObservableList<OwnerItem> result = FXCollections.observableArrayList();
         result.add(new OwnerItem(new ArrayList<>(), Constants.FAMILY));
@@ -161,10 +163,10 @@ public final class AttachmentDialogController extends BaseController {
             owners.add(user.getId());
             result.add(new OwnerItem(owners, user.toString()));
         });
-
+        
         return result;
     }
-
+    
     private ObservableList<OwnerItem> getAttachmentUserRelationshipOwners(final Map<Integer, User> users,
             final Relationship relationship) {
         List<Relationship> relationships = new ArrayList<>();
@@ -173,23 +175,23 @@ public final class AttachmentDialogController extends BaseController {
         BusinessLogicLocator locator = BusinessLogicLocator.getInstance();
         locator.getUserRelationshipBusinessLogic().getRelationships(relationships)
                 .forEach((UserRelationship userRelationship) -> {
-            List<Integer> owners = new ArrayList<>();
-            owners.add(userRelationship.getRelationshipOf());
-            owners.add(userRelationship.getRelationshipWith());
-            User of = users.get(userRelationship.getRelationshipOf());
-            User with = users.get(userRelationship.getRelationshipWith());
-            String relationshipTitle = of.toString() + " " + with.toString();
-            OwnerItem ownerItem = new OwnerItem(owners, relationshipTitle);
-            if (!result.contains(ownerItem)) {
-                result.add(ownerItem);
-            }
-        });
-
+                    List<Integer> owners = new ArrayList<>();
+                    owners.add(userRelationship.getRelationshipOf());
+                    owners.add(userRelationship.getRelationshipWith());
+                    User of = users.get(userRelationship.getRelationshipOf());
+                    User with = users.get(userRelationship.getRelationshipWith());
+                    String relationshipTitle = of.toString() + " " + with.toString();
+                    OwnerItem ownerItem = new OwnerItem(owners, relationshipTitle);
+                    if (!result.contains(ownerItem)) {
+                        result.add(ownerItem);
+                    }
+                });
+        
         return result;
     }
-
+    
     private boolean validateAttachment(final Attachment attachment) {
-
+        
         // Validate fields
         StringBuilder resultBuilder = new StringBuilder();
         if (attachment.getName().trim().isEmpty()) {
@@ -198,7 +200,7 @@ public final class AttachmentDialogController extends BaseController {
         if (attachment.getOwners().isEmpty() && !attachment.isFamilyOwner()) {
             resultBuilder.append(Constants.OWNERS_MUST_BE_SELECTED);
         }
-
+        
         // Present error
         String result = resultBuilder.toString();
         boolean isValidUserRelationship = result.isEmpty();
@@ -209,41 +211,41 @@ public final class AttachmentDialogController extends BaseController {
         }
         return isValidUserRelationship;
     }
-
+    
     public static final class OwnerItem {
-
+        
         private final List<Integer> owners;
         private final String title;
-
+        
         public OwnerItem(final List<Integer> owners, final String title) {
             this.owners = owners;
             this.title = title;
             Collections.sort(this.owners);
         }
-
+        
         public Collection<Integer> getOwners() {
             return owners;
         }
-
+        
         public String getTitle() {
             return title;
         }
-
+        
         @Override
         public String toString() {
             return title;
         }
-
+        
         @Override
         public boolean equals(final Object other) {
             if (other == null || !(other instanceof OwnerItem)) {
                 return false;
             }
-
+            
             OwnerItem otherOwnerItem = (OwnerItem) other;
             return owners.equals(otherOwnerItem.getOwners());
         }
-
+        
         @Override
         public int hashCode() {
             int hash = HASH;

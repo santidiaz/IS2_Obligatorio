@@ -84,6 +84,12 @@ public final class TextualTreeController extends BaseController {
     private void handleAscendingCkeckbox() {
         loadTextualTree();
     }
+    
+    @FXML
+    private void handleOnAddRelationship() {
+        getNavigationManager().showUserRelationshipDialog();
+        loadTextualTree();
+    }
 
     private void loadTextualTree() {
         boolean isAscending = ascendingCkeckbox.isSelected();

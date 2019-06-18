@@ -86,7 +86,7 @@
                 </AnchorPane>
             </items>
         </SplitPane>
-        <Label layoutX="29.0" layoutY="14.0" text="Familia" underline="true">
+        <Label layoutX="29.0" layoutY="7.0" text="Familia" underline="true">
             <font>
                 <Font size="23.0" />
             </font>
