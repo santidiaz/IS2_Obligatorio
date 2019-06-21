@@ -7,6 +7,8 @@
 package com.mytree.ui.controller;
 
 import com.mytree.NavigationManager;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public abstract class BaseController {
@@ -26,6 +28,11 @@ public abstract class BaseController {
     @FXML
     private void initialize() {
         onInitialize();
+    }
+    
+    @FXML
+    public void exitApplication(ActionEvent event) {
+        Platform.exit();
     }
     
 }

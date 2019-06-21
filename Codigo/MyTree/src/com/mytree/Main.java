@@ -6,7 +6,13 @@
 package com.mytree;
 
 import com.mytree.assembler.Assembler;
+import com.mytree.business.logic.AttachmentBusinessLogic;
+import com.mytree.business.logic.BusinessLogicLocator;
+import com.mytree.business.logic.UserBusinessLogic;
+import com.mytree.business.logic.UserRelationshipBusinessLogic;
+import com.mytree.business.model.Attachment;
 import com.mytree.business.model.User;
+import com.mytree.business.model.UserRelationship;
 import com.mytree.ui.controller.AttachmentDialogController;
 import com.mytree.ui.controller.AttachmentsController;
 import com.mytree.ui.controller.MainController;
@@ -19,8 +25,13 @@ import com.mytree.ui.controller.UserRelationshipDialogController;
 import com.mytree.ui.controller.UsersController;
 import com.mytree.ui.model.UserModel;
 import com.mytree.utils.Constants;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Collection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -335,5 +346,107 @@ public final class Main
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource(path));
         return loader;
+    }
+    
+    @Override
+    public void stop(){        
+        BusinessLogicLocator locator = BusinessLogicLocator.getInstance();
+        AttachmentBusinessLogic attachmentLogic = locator.getAttachmentBusinessLogic();
+        UserBusinessLogic userLogic = locator.getUserBusinessLogic();
+        UserRelationshipBusinessLogic relationshipsLogic = locator.getUserRelationshipBusinessLogic();
+        
+        Collection<User> users = userLogic.getUsers(false);
+        Collection<Attachment> attachments = attachmentLogic.getAttachments();
+        UserRelationship[][] relationships = relationshipsLogic.getRealationshipsMatrix();
+        
+        saveUsers(users);
+        saveAttachments(attachments);
+        saveRelationships(relationships);
+        
+    }
+    
+    private void saveUsers(Collection<User> users) {
+        try {
+            File archivoGuardados = new File("resources/datasources/users.txt");
+            if (archivoGuardados.exists() && !archivoGuardados.isDirectory()) {
+                FileOutputStream fg = new FileOutputStream(archivoGuardados);
+                BufferedOutputStream bg = new BufferedOutputStream(fg);
+                ObjectOutputStream sg = new ObjectOutputStream(bg);
+                sg.writeObject(users);
+                sg.close();
+            } else {// Si no existe creo un nuevo archivo y guardo en este
+                archivoGuardados.getParentFile().mkdirs();
+                archivoGuardados.createNewFile();
+                
+                FileOutputStream fg = new FileOutputStream(archivoGuardados);
+                BufferedOutputStream bg = new BufferedOutputStream(fg);
+                ObjectOutputStream sg = new ObjectOutputStream(bg);
+                sg.writeObject(users);
+                sg.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    private void saveAttachments(Collection<Attachment> attachments) {
+        try {
+            File archivoGuardados = new File("resources/datasources/attachments.txt");
+            if (archivoGuardados.exists() && !archivoGuardados.isDirectory()) {
+                FileOutputStream fg = new FileOutputStream(archivoGuardados);
+                BufferedOutputStream bg = new BufferedOutputStream(fg);
+                ObjectOutputStream sg = new ObjectOutputStream(bg);
+                sg.writeObject(attachments);
+                sg.close();
+            } else {
+                archivoGuardados.getParentFile().mkdirs();
+                archivoGuardados.createNewFile();
+                
+                FileOutputStream fg = new FileOutputStream(archivoGuardados);
+                BufferedOutputStream bg = new BufferedOutputStream(fg);
+                ObjectOutputStream sg = new ObjectOutputStream(bg);
+                sg.writeObject(attachments);
+                sg.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void saveRelationships(UserRelationship[][] relationships) {
+        try {
+            File archivoGuardados = new File("resources/datasources/relationships.txt");
+            if (archivoGuardados.exists() && !archivoGuardados.isDirectory()) {
+                FileOutputStream fg = new FileOutputStream(archivoGuardados);
+                BufferedOutputStream bg = new BufferedOutputStream(fg);
+                ObjectOutputStream sg = new ObjectOutputStream(bg);
+                sg.writeObject(relationships);
+                sg.close();
+            } else {
+                archivoGuardados.getParentFile().mkdirs();
+                archivoGuardados.createNewFile();
+                
+                FileOutputStream fg = new FileOutputStream(archivoGuardados);
+                BufferedOutputStream bg = new BufferedOutputStream(fg);
+                ObjectOutputStream sg = new ObjectOutputStream(bg);
+                sg.writeObject(relationships);
+                sg.close();
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        } catch (IOException e) {
+            System.out.println("Error initializing stream");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

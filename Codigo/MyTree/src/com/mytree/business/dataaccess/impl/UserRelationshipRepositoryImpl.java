@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.mytree.business.dataaccess.impl;
 
 import com.mytree.business.dataaccess.UserRelationshipRepository;
@@ -15,16 +15,16 @@ import java.util.List;
 public final class UserRelationshipRepositoryImpl
         extends RepositoryBase<UserRelationship[][]>
         implements UserRelationshipRepository {
-
+    
     public UserRelationshipRepositoryImpl(final UserRelationship[][] dataSource) {
         super(dataSource);
     }
-
+    
     @Override
     public void save(final UserRelationship entity) {
         int of = entity.getRelationshipOf();
         int with = entity.getRelationshipWith();
-
+        
         UserRelationship oppositeRelationship = new UserRelationship();
         oppositeRelationship.setRelationshipOf(with);
         oppositeRelationship.setRelationshipWith(of);
@@ -32,11 +32,11 @@ public final class UserRelationshipRepositoryImpl
         oppositeRelationship.setToDate(entity.getToDate());
         oppositeRelationship.setRelationship(entity.getRelationship().getOpposite());
         oppositeRelationship.setCurrentRelationship(entity.isCurrentRelationship());
-
+        
         getDataSource()[of][with] = entity;
         getDataSource()[with][of] = oppositeRelationship;
     }
-
+    
     @Override
     public Collection<UserRelationship> getRealationships(final int id) {
         List<UserRelationship> result = new ArrayList<>();
@@ -47,7 +47,7 @@ public final class UserRelationshipRepositoryImpl
         }
         return result;
     }
-
+    
     @Override
     public Collection<UserRelationship> getRealationships(final List<Relationship> relationships) {
         List<UserRelationship> result = new ArrayList<>();
@@ -60,5 +60,10 @@ public final class UserRelationshipRepositoryImpl
             }
         }
         return result;
+    }
+    
+    @Override
+    public UserRelationship[][] getRealationshipsMatrix() {
+        return super.getDataSource();
     }
 }

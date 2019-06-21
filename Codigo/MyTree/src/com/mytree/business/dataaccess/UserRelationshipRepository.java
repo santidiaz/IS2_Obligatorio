@@ -17,4 +17,5 @@ public interface UserRelationshipRepository
     
     Collection<UserRelationship> getRealationships(List<Relationship> relationships);
 
+    UserRelationship[][] getRealationshipsMatrix();
 }

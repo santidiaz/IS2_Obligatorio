@@ -17,4 +17,5 @@ public interface UserRelationshipBusinessLogic
 
     Collection<UserRelationship> getRelationships(List<Relationship> relationships);
 
+    UserRelationship[][] getRealationshipsMatrix();
 }

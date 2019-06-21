@@ -44,5 +44,9 @@ public final class UserRelationshipBusinessLogicImpl
     public Collection<UserRelationship> getRelationships(final List<Relationship> relationships) {
         return getRepository().getRealationships(relationships);
     }
-
+    
+    @Override
+    public UserRelationship[][] getRealationshipsMatrix() {
+        return getRepository().getRealationshipsMatrix();
+    }
 }

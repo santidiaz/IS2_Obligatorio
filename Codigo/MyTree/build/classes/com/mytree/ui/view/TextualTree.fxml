@@ -22,20 +22,20 @@
             </columns>
         </TreeTableView>
     </center>
-   <top>
+    <top>
         <AnchorPane prefHeight="106.0" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="10.0" layoutY="74.0" text="Familiar" AnchorPane.leftAnchor="10.0" />
                 <ComboBox fx:id="userComboBox" layoutX="75.0" layoutY="69.0" onAction="#handleUserComboBox" prefHeight="31.0" prefWidth="259.0" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="69.0" />
                 <CheckBox fx:id="ascendingCkeckbox" layoutX="358.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleAscendingCkeckbox" text="Ascendente" AnchorPane.rightAnchor="252.0" />
-            <Button fx:id="addRelationshipButton" layoutX="519.0" layoutY="69.0" mnemonicParsing="false" onAction="#handleOnAddRelationship" text="Add Relationship" />
-            <Label layoutX="36.0" layoutY="14.0" text="Árbol Textual" underline="true">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Label>
-            <Separator layoutX="4.0" layoutY="60.0" prefHeight="3.0" prefWidth="702.0" />
+                <Button fx:id="addRelationshipButton" layoutX="519.0" layoutY="69.0" mnemonicParsing="false" onAction="#handleOnAddRelationship" text="Add Relationship" />
+                <Label layoutX="36.0" layoutY="14.0" text="Árbol Textual" underline="true">
+                    <font>
+                        <Font size="23.0" />
+                    </font>
+                </Label>
+                <Separator layoutX="4.0" layoutY="60.0" prefHeight="3.0" prefWidth="702.0" />
             </children>
         </AnchorPane>
-   </top>
+    </top>
 </BorderPane>

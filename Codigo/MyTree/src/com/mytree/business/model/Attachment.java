@@ -5,10 +5,11 @@
  */
 package com.mytree.business.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public final class Attachment {
+public final class Attachment implements Serializable {
 
     private static final int HASH = 5;
     private static final int HASH_RANDOM = 53;
