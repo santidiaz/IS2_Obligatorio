@@ -59,8 +59,10 @@ public final class Assembler {
                 sa.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -84,8 +86,10 @@ public final class Assembler {
                 sa.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -110,8 +114,10 @@ public final class Assembler {
                 sa.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         } catch (Exception e) {
             // TODO Auto-generated catch block

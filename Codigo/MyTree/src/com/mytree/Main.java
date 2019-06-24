@@ -85,7 +85,7 @@ public final class Main
             dialogStage.showAndWait();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -105,7 +105,7 @@ public final class Main
             primaryStage.show();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -123,7 +123,7 @@ public final class Main
             controller.setNavigationManager(this);
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -141,7 +141,7 @@ public final class Main
             controller.setNavigationManager(this);
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -159,7 +159,7 @@ public final class Main
             controller.setNavigationManager(this);
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -177,7 +177,7 @@ public final class Main
             controller.setNavigationManager(this);
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -207,7 +207,7 @@ public final class Main
             dialogStage.showAndWait();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -235,7 +235,7 @@ public final class Main
             dialogStage.showAndWait();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -263,7 +263,7 @@ public final class Main
             dialogStage.showAndWait();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -291,7 +291,7 @@ public final class Main
             dialogStage.showAndWait();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -318,7 +318,7 @@ public final class Main
             dialogStage.showAndWait();
             
         } catch (IOException e) {
-            // TODO: Present an error message
+            e.printStackTrace();
         }
     }
     
@@ -385,11 +385,12 @@ public final class Main
                 sg.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -414,8 +415,10 @@ public final class Main
                 sg.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         } catch (Exception e) {
             e.printStackTrace();
@@ -442,8 +445,10 @@ public final class Main
                 sg.close();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             System.out.println("File not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error initializing stream");
         } catch (Exception e) {
             e.printStackTrace();

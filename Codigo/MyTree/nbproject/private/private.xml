@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/src/com/mytree/ui/view/TextualTree.fxml</file>
-            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/src/com/mytree/ui/controller/UserEditDialogController.java</file>
-            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/src/com/mytree/ui/view/Users.fxml</file>
-            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/src/com/mytree/ui/view/Main.fxml</file>
-            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/src/com/mytree/ui/controller/AttachmentDialogController.java</file>
+            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/test/com/mytree/business/model/RelationshipTest.java</file>
+            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/test/com/mytree/business/model/UserTest.java</file>
+            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/src/com/mytree/business/model/User.java</file>
+            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/test/com/mytree/business/logic/impl/UserRelationshipBusinessLogicImplTest.java</file>
+            <file>file:/C:/Users/santi/Desktop/IS2/Obligatorio/Codigo/MyTree/test/com/mytree/business/logic/impl/UserBusinessLogicImplTest.java</file>
         </group>
     </open-files>
 </project-private>

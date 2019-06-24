@@ -6,6 +6,7 @@
 package com.mytree.business.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.junit.Test;
@@ -111,7 +112,11 @@ public final class UserTest {
     public void testGetAgeCase() {
         int expectedAge = 28;
         User instance = new User();
-        instance.setBirthday(new Date(1991, 5, 20));
+   
+        Calendar cal = Calendar.getInstance();
+        cal.set(1991, 05, 20);
+        Date birthday = cal.getTime();
+        instance.setBirthday(birthday);
 
         assertEquals(expectedAge, instance.getAge());
     }
@@ -120,8 +125,15 @@ public final class UserTest {
     public void testGetAgeForDeathPersonCase() {
         int expectedAge = 73;
         User instance = new User();
-        instance.setBirthday(new Date(1937, 7, 15));
-        instance.setDeathday(new Date(2010, 7, 15));
+        
+        Calendar birthday = Calendar.getInstance();
+        birthday.set(1937, 7, 15);
+
+        Calendar deathday = Calendar.getInstance();
+        deathday.set(2010, 8, 28);
+        
+        instance.setBirthday(birthday.getTime());
+        instance.setDeathday(deathday.getTime());
 
         assertEquals(expectedAge, instance.getAge());
     }
